@@ -13,12 +13,13 @@ class NewsApi():
         response = requests.get(url, headers={"X-Api-Key": API_KEY})
         
         if response.status_code == 200:
-            content = response.json()
+            content = response.json()["articles"][0]
             
             # Title, and description with escape characters removed
             clean_content = {
-                "title": content["articles"][0]["title"].encode('ascii', 'ignore').decode('ascii'),
-                "description": content["articles"][0]["description"].encode('ascii', 'ignore').decode('ascii')
+                "title": content["title"].encode('ascii', 'ignore').decode('ascii'),
+                "description": content["description"].encode('ascii', 'ignore').decode('ascii'),
+                "image_url": content["urlToImage"],
             }
             
             return clean_content

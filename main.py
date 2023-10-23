@@ -1,10 +1,13 @@
-from news_api import NewsApi
+from modules import NewsApi, TextToSpeech
 import json
 
 def main():
+    # Get some content, it ain't much but it's honest work, will do for now
 	news_api = NewsApi()
 	content = news_api.get()
-	print(json.dumps(content, indent=4))
+	
+	text_to_speech = TextToSpeech()
+	text_to_speech.read_article(content)
  
 if __name__ == "__main__":
     main()
